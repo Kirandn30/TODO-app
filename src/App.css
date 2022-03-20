@@ -1,38 +1,66 @@
 .App {
   text-align: center;
+  font-family: 'McLaren', cursive;
+  font-size: 100%;
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  margin: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/dotnoise-light-grey.png");
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.title{
+ background-color: #96c8d1;
+  padding: 1rem 1rem;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.3);
+  color: aliceblue;
+  margin: 0 0 3rem ;
+  font-family: 'McLaren', cursive;
+  text-align: left;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+form{
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+
+}
+
+.task {
+  width: 29rem;
+  height: 3rem;
+  display: flex;
   color: white;
+  margin: 1rem;
 }
 
-.App-link {
-  color: #61dafb;
+.task .content {
+  flex: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.task .content span {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  border-right: none;
+  color: black;
+  margin-right: 1rem;
 }
+
+.todo {
+  flex: 20%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: 2rem;
+  flex-direction: column;
+}
+
+
