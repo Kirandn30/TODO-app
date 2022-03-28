@@ -1,22 +1,14 @@
 import React, { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./Login.css"
-import { signInWithEmailAndPassword } from "firebase/auth"
-import { auth } from "../../config/config"
 import { useNavigate } from 'react-router-dom';
 import { useUserAuth } from '../../context/UserauthContext';
+import { Alert } from '@mui/material';
 
 function Copyright(props: any) {
     return (
@@ -33,7 +25,7 @@ export function Login() {
 
     let [email, setEmail] = React.useState<any>("")
     let [password, setPassword] = useState<any>("")
-    let [err, setErr] = useState<string | unknown>("")
+    let [err, setErr] = useState<string>("")
 
     const navigate = useNavigate();
 
@@ -52,22 +44,13 @@ export function Login() {
         setErr("")
         try {
             await LogIn(email, password)
-            navigate("/")
+            navigate("/profile")
 
         }
-        catch (error) {
-            setErr(error)
+        catch (error: any) {
+            setErr(error.message)
+
         }
-
-
-
-        // signInWithEmailAndPassword(auth, email, password)
-        //     .then((userCredential) => {
-        //         const user = userCredential.user;
-        //         console.log(user);
-        //         navigate('/');
-
-        //     })
     };
 
     return (
@@ -106,6 +89,7 @@ export function Login() {
                                 id="password"
                                 autoComplete="current-password"
                             />
+                            {err && <Alert severity="error">{err}</Alert>}
                             <Button
                                 type="submit"
                                 fullWidth

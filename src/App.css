@@ -86,3 +86,15 @@ h1 {
   flex-direction: column;
   justify-content: center;
 }
+
+.logout{
+position: absolute;
+right: 2rem;
+top: 9rem
+}
+
+.button{
+  display: flex;
+  gap: 5rem 2rem;
+  justify-content: center;
+}

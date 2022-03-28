@@ -9,6 +9,11 @@ import { db } from "../config/config"
 import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc, onSnapshot } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import EditIcon from '@mui/icons-material/Edit';
+import { Button } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useUserAuth } from "../context/UserauthContext"
+import { useNavigate } from "react-router-dom";
+
 
 export const Inputelements = () => {
 
@@ -18,6 +23,7 @@ export const Inputelements = () => {
     let [edit, setEdit] = useState(false)
     let [id, setID] = useState<string>(uuidv4())
 
+    const navigate = useNavigate()
 
     //Get data from DB (Display)
 
@@ -114,14 +120,32 @@ export const Inputelements = () => {
         await updateDoc(todoDoc, newUpdate)
     }
 
+    //Logout
 
+    const context = useUserAuth();
+    if (!context) {
+        return null;
+    }
 
+    const { LogOut } = context;
 
-
+    let logout = async () => {
+        try {
+            await LogOut()
+            navigate("/login")
+        } catch (err: any) {
+            console.log(err.message);
+        }
+    }
 
     return (
         <>
             <div className="inputs">
+                <div className='logout'>
+                    <Button onClick={logout} style={{ backgroundColor: "#96c8d1" }} variant="contained" endIcon={<LogoutIcon />}>
+                        Log Out
+                    </Button>
+                </div>
                 <TextField style={{ width: "15rem", marginRight: "2rem", paddingBottom: "5px" }} id="standard-basic" variant="standard" name="task" label="Todo..." onChange={handelChange} value={task} />
                 <FormControl variant="standard" sx={{ m: 1, mt: 2, width: '10ch' }}>
                     <Input
