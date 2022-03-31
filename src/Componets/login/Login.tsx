@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./Login.css"
 import { useNavigate } from 'react-router-dom';
-import { useUserAuth } from '../../context/UserauthContext';
+import { useUserAuth } from '../context/UserauthContext';
 import { Alert } from '@mui/material';
 
 function Copyright(props: any) {
@@ -29,29 +29,20 @@ export function Login() {
 
     const navigate = useNavigate();
 
-    const context = useUserAuth();
-    if (!context) {
-        return null;
-    }
-
-    const { LogIn } = context;
+    const { LogIn }: any = useUserAuth();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        setEmail(data.get('email'))
-        setPassword(data.get('password'))
-        setErr("")
         try {
             await LogIn(email, password)
-            navigate("/profile")
-
+            navigate("/todo", { replace: true })
         }
         catch (error: any) {
             setErr(error.message)
 
         }
     };
+
 
     return (
         <div className="login">
@@ -68,7 +59,7 @@ export function Login() {
                         <Typography component="h1" variant="h5">
                             Log in
                         </Typography>
-                        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                        <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
                             <TextField
                                 margin="normal"
                                 required
@@ -78,6 +69,7 @@ export function Login() {
                                 name="email"
                                 autoComplete="email"
                                 autoFocus
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                             <TextField
                                 margin="normal"
@@ -88,6 +80,7 @@ export function Login() {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                             {err && <Alert severity="error">{err}</Alert>}
                             <Button

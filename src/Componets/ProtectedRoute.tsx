@@ -1,23 +1,23 @@
-import React, { FC } from 'react'
+import { User } from 'firebase/auth';
+import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useUserAuth } from '../context/UserauthContext';
+import { useUserAuth } from './context/UserauthContext';
 
 
 export const ProtectedRoute = ({ children }: any) => {
 
     const navigate = useNavigate();
 
-    const context = useUserAuth();
-    if (!context) {
-        return null;
-    }
+    const { user }: any = useUserAuth();
 
-    const { user } = context;
+    console.log(user);
 
+    useEffect(() => {
+        if (!user) {
+            navigate("/login")
+        }
+    }, [user])
 
-    if (user == null) {
-        return navigate("/login")
-    }
 
     return children
 }

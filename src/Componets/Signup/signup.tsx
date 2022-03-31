@@ -9,7 +9,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./signup.css"
 import { useNavigate } from "react-router-dom"
-import { useUserAuth } from "../../context/UserauthContext"
+import { useUserAuth } from "../context/UserauthContext"
 import { Alert } from '@mui/material';
 
 
@@ -39,19 +39,16 @@ export default function Signup() {
 
     const { SignUp } = context;
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    console.log(SignUp);
 
-        const data = new FormData(event.currentTarget);
-        setEmail(data.get('email'))
-        setPassword(data.get('password'))
-        setConfirm(data.get("confirm password"))
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if (password === confirm) {
 
             try {
                 await SignUp(email, password)
-                navigate('/login');
+                navigate('/login', { replace: true });
             }
             catch (error: any) {
                 setErr(error.message)
@@ -87,6 +84,7 @@ export default function Signup() {
                                         label="Email Address"
                                         name="email"
                                         autoComplete="email"
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -98,6 +96,7 @@ export default function Signup() {
                                         type="password"
                                         id="password"
                                         autoComplete="new-password"
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -109,6 +108,7 @@ export default function Signup() {
                                         type="confirm password"
                                         id="confirm password"
                                         autoComplete="new-password"
+                                        onChange={(e) => setConfirm(e.target.value)}
                                     />
                                 </Grid>
                             </Grid>

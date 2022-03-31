@@ -1,17 +1,17 @@
-import { Button, Fab } from '@mui/material'
-import React from 'react'
+import { Fab } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 export const Home = () => {
 
   const navigate = useNavigate()
 
+
   let SignUp = () => {
-    navigate("/signup")
+    navigate("/signup", { replace: true })
   }
 
   let LogIn = () => {
-    navigate("/login")
+    navigate("/login", { replace: true })
   }
 
 

@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 import EditIcon from '@mui/icons-material/Edit';
 import { Button } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useUserAuth } from "../context/UserauthContext"
+import { useUserAuth } from "./context/UserauthContext"
 import { useNavigate } from "react-router-dom";
 
 
@@ -30,6 +30,13 @@ export const Inputelements = () => {
     const todoCollectionRef = collection(db, "TODO")
 
     useEffect(() => {
+
+
+    }, [])
+
+
+
+    useEffect(() => {
         const getTODO = async () => {
             const data = await getDocs(todoCollectionRef);
             let arr: any = data.docs.map(doc => ({ ...doc.data(), id: doc.id }))
@@ -41,8 +48,13 @@ export const Inputelements = () => {
             }
             finally { console.log("Complete") }
         }
-        getTODO()
-    }, [edit])
+
+        return () => {
+            getTODO()
+        }
+
+    }, [])
+
 
 
     //Get hold of values from input feild
@@ -120,23 +132,18 @@ export const Inputelements = () => {
         await updateDoc(todoDoc, newUpdate)
     }
 
-    //Logout
+    const { LogOut }: any = useUserAuth();
 
-    const context = useUserAuth();
-    if (!context) {
-        return null;
-    }
-
-    const { LogOut } = context;
 
     let logout = async () => {
         try {
             await LogOut()
-            navigate("/login")
+            navigate("/")
         } catch (err: any) {
-            console.log(err.message);
+            console.log(err);
         }
     }
+
 
     return (
         <>
