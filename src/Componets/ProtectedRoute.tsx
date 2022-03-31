@@ -1,4 +1,3 @@
-import { User } from 'firebase/auth';
 import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useUserAuth } from './context/UserauthContext';
@@ -12,11 +11,9 @@ export const ProtectedRoute = ({ children }: any) => {
 
     console.log(user);
 
-    useEffect(() => {
-        if (!user) {
-            navigate("/login")
-        }
-    }, [user])
+    if (!user) {
+        navigate("/login")
+    }
 
 
     return children
