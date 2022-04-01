@@ -11,7 +11,6 @@ type UserContextType = {
 }
 
 const UserAuthContext = createContext<UserContextType | null>(null);
-const StateAuthContext = createContext<User | null>(null);
 
 
 export const UserauthContextProvider: FC = ({ children }) => {
@@ -32,11 +31,7 @@ export const UserauthContextProvider: FC = ({ children }) => {
 
     useEffect(() => {
         const Unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUser(user)
-            }
-
-            return Unsubscribe()
+            setUser(user)
         })
 
         return () => {

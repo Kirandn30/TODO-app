@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./signup.css"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useUserAuth } from "../context/UserauthContext"
 import { Alert } from '@mui/material';
 
@@ -38,8 +38,6 @@ export default function Signup() {
     }
 
     const { SignUp } = context;
-
-    console.log(SignUp);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -121,6 +119,13 @@ export default function Signup() {
                             >
                                 Sign Up
                             </Button>
+                            <Grid container justifyContent="flex-end">
+                                <Grid item>
+                                    <Link to={"/login"} className="link">
+                                        Already have an account? Sign in
+                                    </Link>
+                                </Grid>
+                            </Grid>
                         </Box>
                     </Box>
                     <Copyright sx={{ mt: 5 }} />

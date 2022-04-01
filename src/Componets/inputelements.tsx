@@ -6,7 +6,7 @@ import { Fab, FormControl, Input, InputAdornment, TextField } from '@mui/materia
 import AddIcon from '@mui/icons-material/Add';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import { db } from "../config/config"
-import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc, onSnapshot } from 'firebase/firestore';
+import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc, onSnapshot, serverTimestamp, orderBy, query } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import EditIcon from '@mui/icons-material/Edit';
 import { Button } from '@mui/material';
@@ -29,28 +29,21 @@ export const Inputelements = () => {
 
     const todoCollectionRef = collection(db, "TODO")
 
-    useEffect(() => {
-
-
-    }, [])
-
-
+    let Q = query(todoCollectionRef, orderBy("createdAt"))
 
     useEffect(() => {
-        const getTODO = async () => {
-            const data = await getDocs(todoCollectionRef);
-            let arr: any = data.docs.map(doc => ({ ...doc.data(), id: doc.id }))
-            try {
-                setTodo(arr)
-            }
-            catch (error) {
-                console.log(error)
-            }
-            finally { console.log("Complete") }
-        }
+
+        const unsub = onSnapshot(Q, (snapshot) => {
+            let arr: any = []
+            snapshot.docs.forEach((doc) => {
+                arr.push({ ...doc.data(), id: doc.id })
+            })
+            setTodo(arr)
+
+        })
 
         return () => {
-            getTODO()
+            unsub()
         }
 
     }, [])
@@ -82,9 +75,8 @@ export const Inputelements = () => {
         // Add data to firestore (inside Add function)
 
         const addTODO = async () => {
-            try { task !== "" && await addDoc(todoCollectionRef, { deadline: deadline, taskName: task }) }
+            try { task !== "" && await addDoc(todoCollectionRef, { deadline: deadline, taskName: task, createdAt: serverTimestamp() }) }
             catch (error) { console.log(error) }
-            finally { console.log("complete") }
         }
 
         addTODO()
@@ -132,13 +124,15 @@ export const Inputelements = () => {
         await updateDoc(todoDoc, newUpdate)
     }
 
-    const { LogOut }: any = useUserAuth();
+    const { LogOut, user }: any = useUserAuth();
 
 
     let logout = async () => {
         try {
             await LogOut()
             navigate("/")
+            console.log(user);
+
         } catch (err: any) {
             console.log(err);
         }

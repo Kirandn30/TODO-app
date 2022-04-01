@@ -9,8 +9,6 @@ export const ProtectedRoute = ({ children }: any) => {
 
     const { user }: any = useUserAuth();
 
-    console.log(user);
-
     if (!user) {
         navigate("/login")
     }

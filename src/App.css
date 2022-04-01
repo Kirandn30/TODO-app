@@ -1,6 +1,7 @@
 html {
   font-family: "Montserrat", sans-serif;
   background-image: url("https://www.transparenttextures.com/patterns/dotnoise-light-grey.png");
+  background-color: aliceblue;
 }
 
 h1 {
@@ -97,4 +98,9 @@ top: 9rem
   display: flex;
   gap: 5rem 2rem;
   justify-content: center;
+}
+
+.link{
+  color: rgb(54, 97, 175);
+  font-size:medium
 }

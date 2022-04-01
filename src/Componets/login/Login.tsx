@@ -6,9 +6,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./Login.css"
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUserAuth } from '../context/UserauthContext';
-import { Alert } from '@mui/material';
+import { Alert, Grid } from '@mui/material';
 
 function Copyright(props: any) {
     return (
@@ -29,13 +29,14 @@ export function Login() {
 
     const navigate = useNavigate();
 
-    const { LogIn }: any = useUserAuth();
+    const { LogIn, user }: any = useUserAuth();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
             await LogIn(email, password)
             navigate("/todo", { replace: true })
+            console.log(user);
         }
         catch (error: any) {
             setErr(error.message)
@@ -83,6 +84,13 @@ export function Login() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             {err && <Alert severity="error">{err}</Alert>}
+                            <Grid container justifyContent="flex-end">
+                                <Grid>
+                                    <Link to={'/signup'} className="link">
+                                        {"Don't have an account? Sign Up"}
+                                    </Link>
+                                </Grid>
+                            </Grid>
                             <Button
                                 type="submit"
                                 fullWidth
@@ -96,6 +104,6 @@ export function Login() {
                     <Copyright sx={{ mt: 8, mb: 4 }} />
                 </Container>
             </ThemeProvider>
-        </div>
+        </div >
     );
 }
