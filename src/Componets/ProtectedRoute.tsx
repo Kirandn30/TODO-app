@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useUserAuth } from './context/UserauthContext';
 
 
@@ -9,9 +9,17 @@ export const ProtectedRoute = ({ children }: any) => {
 
     const { user }: any = useUserAuth();
 
-    if (!user) {
-        navigate("/login")
-    }
+    let status: string | null = localStorage.getItem("user")
+
+
+    useEffect(() => {
+        if (status === "loggedOut") {
+            console.log(status);
+
+            navigate("/login")
+        }
+    }, [])
+
 
 
     return children

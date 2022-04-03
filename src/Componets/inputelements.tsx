@@ -127,11 +127,11 @@ export const Inputelements = () => {
     const { LogOut, user }: any = useUserAuth();
 
 
-    let logout = async () => {
+
+    let endSession = async () => {
         try {
             await LogOut()
             navigate("/")
-            console.log(user);
 
         } catch (err: any) {
             console.log(err);
@@ -143,7 +143,7 @@ export const Inputelements = () => {
         <>
             <div className="inputs">
                 <div className='logout'>
-                    <Button onClick={logout} style={{ backgroundColor: "#96c8d1" }} variant="contained" endIcon={<LogoutIcon />}>
+                    <Button onClick={endSession} style={{ backgroundColor: "#96c8d1" }} variant="contained" endIcon={<LogoutIcon />}>
                         Log Out
                     </Button>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -29,14 +29,13 @@ export function Login() {
 
     const navigate = useNavigate();
 
-    const { LogIn, user }: any = useUserAuth();
+    const { LogIn }: any = useUserAuth();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
             await LogIn(email, password)
             navigate("/todo", { replace: true })
-            console.log(user);
         }
         catch (error: any) {
             setErr(error.message)

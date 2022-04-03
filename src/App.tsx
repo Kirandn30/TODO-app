@@ -17,9 +17,10 @@ let App = () => {
         <UserauthContextProvider>
           <Routes>
             <Route index element={<Home />} />
-            <Route path='/signup' element={<SignUp />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/todo' element={<ProtectedRoute><Inputelements /></ProtectedRoute>} />
+            <Route path='signup' element={<SignUp />} />
+            <Route path='login' element={<Login />} />
+            <Route path='todo' element={<ProtectedRoute><Inputelements /></ProtectedRoute>} />
+            <Route path="*" element={<p>There's nothing here: 404!</p>} />
           </Routes>
         </UserauthContextProvider>
       </div>

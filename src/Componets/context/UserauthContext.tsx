@@ -17,6 +17,7 @@ export const UserauthContextProvider: FC = ({ children }) => {
 
     let [user, setUser] = useState<User | null>(null)
 
+
     let SignUp = (email: string, password: string) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
@@ -30,8 +31,12 @@ export const UserauthContextProvider: FC = ({ children }) => {
     }
 
     useEffect(() => {
-        const Unsubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user)
+        const Unsubscribe = onAuthStateChanged(auth, (cred) => {
+            localStorage.setItem("user", cred ? "loggedIn" : "loggedOut")
+
+            let status: string | null = localStorage.getItem("user")
+
+
         })
 
         return () => {
