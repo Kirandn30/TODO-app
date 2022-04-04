@@ -31,6 +31,8 @@ export function Login() {
 
     const { LogIn }: any = useUserAuth();
 
+    //login button with Login function from context
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {

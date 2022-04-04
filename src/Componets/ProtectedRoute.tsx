@@ -11,10 +11,11 @@ export const ProtectedRoute = ({ children }: any) => {
 
     let status: string | null = localStorage.getItem("user")
 
+    //checking if user is authorized, if not redirecting back to login page
+
 
     useEffect(() => {
         if (status === "loggedOut") {
-            console.log(status);
 
             navigate("/login")
         }

@@ -39,6 +39,8 @@ export default function Signup() {
 
     const { SignUp } = context;
 
+    //signup button with SignUp function from context
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 

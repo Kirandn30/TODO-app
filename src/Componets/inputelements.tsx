@@ -124,11 +124,11 @@ export const Inputelements = () => {
         await updateDoc(todoDoc, newUpdate)
     }
 
-    const { LogOut, user }: any = useUserAuth();
+    const { LogOut }: any = useUserAuth();
 
+    //logout button with Logout function from context
 
-
-    let endSession = async () => {
+    let logout = async () => {
         try {
             await LogOut()
             navigate("/")
@@ -143,7 +143,7 @@ export const Inputelements = () => {
         <>
             <div className="inputs">
                 <div className='logout'>
-                    <Button onClick={endSession} style={{ backgroundColor: "#96c8d1" }} variant="contained" endIcon={<LogoutIcon />}>
+                    <Button onClick={logout} style={{ backgroundColor: "#96c8d1" }} variant="contained" endIcon={<LogoutIcon />}>
                         Log Out
                     </Button>
                 </div>

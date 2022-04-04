@@ -3,13 +3,7 @@ import { Mytask } from '../project.types'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CheckIcon from '@mui/icons-material/Check';
-
-type TodoTaskProps = {
-  element: Mytask
-  deleteTaks(taksIdtodelete: string): void
-  editTask(taskIdtoedit: string): void
-  ID: string
-}
+import { TodoTaskProps } from "../project.types"
 
 export const TodoTask = ({ element, deleteTaks, editTask, ID }: TodoTaskProps) => {
 
