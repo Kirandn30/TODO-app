@@ -3,10 +3,13 @@ import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 
 export const Header = () => {
     return (
-        <div>
-            <div className='title'>
-                <h1><PlaylistAddCheckIcon style={{ fontSize: "2rem" }} /> TODO LIST APP</h1>
-            </div>
-        </div>
+<div>
+  <div className='title'>
+    <h1 style={{ display: "flex", alignItems: "center", fontSize: "2rem", color: "#333" }}>
+      <PlaylistAddCheckIcon style={{ fontSize: "2rem", marginRight: "0.5rem" }} />
+      TODO LIST APP
+    </h1>
+  </div>
+</div>
     )
 }
