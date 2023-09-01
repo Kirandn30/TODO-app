@@ -7,7 +7,7 @@ export const Header = () => {
   <div className='title'>
     <h1 style={{ display: "flex", alignItems: "center", fontSize: "2rem", color: "#333" }}>
       <PlaylistAddCheckIcon style={{ fontSize: "2rem", marginRight: "0.5rem" }} />
-      TODO LIST APP
+      Todo App Lists
     </h1>
   </div>
 </div>
